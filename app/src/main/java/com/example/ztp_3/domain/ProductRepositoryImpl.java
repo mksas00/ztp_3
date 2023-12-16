@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.ztp_3.infrastructure.ApiClient;
 import com.example.ztp_3.infrastructure.ProductApiService;
-import java.io.IOException;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,5 +40,76 @@ public class ProductRepositoryImpl implements ProductRepository {
         });
 
         return data;
+    }
+
+    @Override
+    public LiveData<Product> getProductDetails(String productId) {
+        final MutableLiveData<Product> data = new MutableLiveData<>();
+        productApiService.getProductDetails(productId).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if(response.body()!=null){
+                    data.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.e(TAG, "Error fetching product details", t);
+                data.setValue(null);
+            }
+        });
+
+        return data;
+    }
+
+    public void deleteProduct(String productId) {
+        productApiService.deleteProduct(productId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    Log.e(TAG, "Product deleted successfully");
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error fetching product details", t);
+            }
+        });
+    }
+
+    @Override
+    public void addProduct(Product product) {
+
+        Call<Void> call = productApiService.addProduct(product);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e(TAG, "Product added successfully");
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error adding product", t);
+            }
+        });
+    }
+
+    @Override
+    public void editProduct(Product product) {
+
+        Call<Void> call = productApiService.editProduct(product);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.e(TAG, "Product edited successfully");
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error editing product", t);
+            }
+        });
     }
 }

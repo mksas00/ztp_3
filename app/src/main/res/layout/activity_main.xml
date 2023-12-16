@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".application.MainActivity">
+    tools:context=".application.Activities.ProductListActivity"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/product_tiem"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="true">
+
+
+        <TextView
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Name" />
+
+        <TextView
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Price" />
+
+        <TextView
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Category" />
+
+        <TextView
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Quantity" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="16dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:contentDescription="ADD"
+        android:src="@drawable/baseline_add_24" />
+
 </LinearLayout>
+
+

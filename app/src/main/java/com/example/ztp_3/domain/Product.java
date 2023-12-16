@@ -1,6 +1,5 @@
 package com.example.ztp_3.domain;
 
-
 public class Product {
 
     private String id;
